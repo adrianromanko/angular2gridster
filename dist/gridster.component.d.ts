@@ -12,6 +12,8 @@ import { GridsterPrototypeService } from './gridster-prototype/gridster-prototyp
 import { GridsterOptions } from './GridsterOptions';
 export declare class GridsterComponent implements OnInit, AfterContentInit, OnDestroy {
     private zone;
+    elementRef: ElementRef;
+    gridster: GridsterService;
     private gridsterPrototype;
     options: IGridsterOptions;
     optionsChange: EventEmitter<any>;
@@ -22,7 +24,6 @@ export declare class GridsterComponent implements OnInit, AfterContentInit, OnDe
     isDragging: boolean;
     isResizing: boolean;
     isReady: boolean;
-    gridster: GridsterService;
     $element: HTMLElement;
     gridsterOptions: GridsterOptions;
     private subscription;

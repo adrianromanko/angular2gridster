@@ -5,3 +5,4 @@ export { GridsterItemPrototypeDirective } from './gridster-prototype/gridster-it
 export { IGridsterOptions } from './IGridsterOptions';
 export { IGridsterDraggableOptions } from './IGridsterDraggableOptions';
 export { GridsterOptions } from './GridsterOptions';
+export { GridListItem } from './gridlist/GridListItem';

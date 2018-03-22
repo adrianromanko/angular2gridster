@@ -9,8 +9,12 @@ import { GridListItem } from './gridList/GridListItem';
 import { GridsterComponent } from './gridster.component';
 import { GridsterOptions } from './GridsterOptions';
 
+export const GridsterServiceFactory = () => GridsterService.getInstance();
+
 @Injectable()
 export class GridsterService {
+    private static instance: GridsterService = null;
+
     $element: HTMLElement;
 
     gridList: GridList;
@@ -20,7 +24,7 @@ export class GridsterService {
     _itemsMap: { [breakpoint: string]: Array<GridListItem> } = {};
     disabledItems: Array<GridListItem> = [];
 
-    options: IGridsterOptions;
+    private _options: IGridsterOptions;
     draggableOptions: IGridsterDraggableOptions;
 
     gridsterRect: ClientRect;
@@ -48,7 +52,23 @@ export class GridsterService {
 
     private isInit = false;
 
+
+    set options(opts: IGridsterOptions) {
+        this._options = opts;
+    }
+
+    get options(): IGridsterOptions {
+        return this._options;
+    }
+
     constructor() {
+    }
+
+    public static getInstance(): GridsterService {
+        if (GridsterService.instance === null) {
+            GridsterService.instance = new GridsterService();
+        }
+        return GridsterService.instance;
     }
 
     isInitialized(): boolean {

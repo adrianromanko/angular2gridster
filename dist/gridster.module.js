@@ -10,6 +10,14 @@ var gridster_service_1 = require("./gridster.service");
 var GridsterModule = (function () {
     function GridsterModule() {
     }
+    GridsterModule.forRoot = function () {
+        return {
+            ngModule: GridsterModule,
+            providers: [
+                { provide: gridster_service_1.GridsterService, useClass: gridster_service_1.GridsterService, deps: [] }
+            ]
+        };
+    };
     return GridsterModule;
 }());
 GridsterModule.decorators = [
@@ -28,8 +36,7 @@ GridsterModule.decorators = [
                     gridster_item_prototype_directive_1.GridsterItemPrototypeDirective
                 ],
                 providers: [
-                    gridster_prototype_service_1.GridsterPrototypeService,
-                    gridster_service_1.GridsterService
+                    gridster_prototype_service_1.GridsterPrototypeService
                 ]
             },] },
 ];

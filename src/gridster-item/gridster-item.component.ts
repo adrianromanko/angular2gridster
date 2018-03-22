@@ -3,7 +3,7 @@ import { Component, OnInit, ElementRef, Inject, Host, Input, Output, ViewChild,
     ChangeDetectionStrategy, AfterViewInit, NgZone } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { GridsterService } from '../gridster.service';
+import { GridsterService, GridsterServiceFactory } from '../gridster.service';
 import { GridListItem } from '../gridList/GridListItem';
 import {DraggableEvent} from '../utils/DraggableEvent';
 import {Draggable} from '../utils/draggable';
@@ -131,6 +131,11 @@ import {utils} from '../utils/utils';
       border-color: transparent transparent #ccc
     }
     `],
+    providers: [{
+        provide: GridsterService,
+        useFactory: GridsterServiceFactory,
+        deps: []
+    }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridsterItemComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
@@ -185,11 +190,6 @@ export class GridsterItemComponent implements OnInit, OnChanges, AfterViewInit, 
     @HostBinding('class.is-resizing') isResizing = false;
 
     $element: HTMLElement;
-    elementRef: ElementRef;
-    /**
-     * Gridster provider service
-     */
-    gridster: GridsterService;
 
     item: GridListItem;
 
@@ -220,12 +220,8 @@ export class GridsterItemComponent implements OnInit, OnChanges, AfterViewInit, 
     private dragSubscriptions: Array<Subscription> = [];
     private resizeSubscriptions: Array<Subscription> = [];
 
-    constructor(private zone: NgZone,
-                @Inject(ElementRef) elementRef: ElementRef,
-                @Host() gridster: GridsterService) {
+    constructor(private zone: NgZone, public elementRef: ElementRef, public gridster: GridsterService) {
 
-        this.gridster = gridster;
-        this.elementRef = elementRef;
         this.$element = elementRef.nativeElement;
 
         this.item = (new GridListItem()).setFromGridsterItem(this);

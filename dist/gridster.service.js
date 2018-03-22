@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 require("rxjs/add/operator/filter");
 var gridList_1 = require("./gridList/gridList");
+exports.GridsterServiceFactory = function () { return GridsterService.getInstance(); };
 var GridsterService = (function () {
     function GridsterService() {
         this.items = [];
@@ -11,6 +12,22 @@ var GridsterService = (function () {
         this.disabledItems = [];
         this.isInit = false;
     }
+    Object.defineProperty(GridsterService.prototype, "options", {
+        get: function () {
+            return this._options;
+        },
+        set: function (opts) {
+            this._options = opts;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    GridsterService.getInstance = function () {
+        if (GridsterService.instance === null) {
+            GridsterService.instance = new GridsterService();
+        }
+        return GridsterService.instance;
+    };
     GridsterService.prototype.isInitialized = function () {
         return this.isInit;
     };
@@ -398,6 +415,7 @@ var GridsterService = (function () {
     };
     return GridsterService;
 }());
+GridsterService.instance = null;
 GridsterService.decorators = [
     { type: core_1.Injectable },
 ];

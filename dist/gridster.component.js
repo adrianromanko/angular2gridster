@@ -16,6 +16,8 @@ var GridsterOptions_1 = require("./GridsterOptions");
 var GridsterComponent = (function () {
     function GridsterComponent(zone, elementRef, gridster, gridsterPrototype) {
         this.zone = zone;
+        this.elementRef = elementRef;
+        this.gridster = gridster;
         this.gridsterPrototype = gridsterPrototype;
         this.optionsChange = new core_1.EventEmitter();
         this.ready = new core_1.EventEmitter();
@@ -24,7 +26,6 @@ var GridsterComponent = (function () {
         this.isResizing = false;
         this.isReady = false;
         this.subscription = new Subscription_1.Subscription();
-        this.gridster = gridster;
         this.$element = elementRef.nativeElement;
     }
     GridsterComponent.prototype.ngOnInit = function () {
@@ -231,7 +232,11 @@ GridsterComponent.decorators = [
                 selector: 'gridster',
                 template: "<div class=\"gridster-container\">\n      <ng-content></ng-content>\n      <div class=\"position-highlight\" style=\"display:none;\" #positionHighlight>\n        <div class=\"inner\"></div>\n      </div>\n    </div>",
                 styles: ["\n    :host {\n        position: relative;\n        display: block;\n        left: 0;\n        width: 100%;\n    }\n\n    :host.gridster--dragging {\n        -moz-user-select: none;\n        -khtml-user-select: none;\n        -webkit-user-select: none;\n        -ms-user-select: none;\n        user-select: none;\n    }\n\n    .gridster-container {\n        position: relative;\n        width: 100%;\n        list-style: none;\n        -webkit-transition: width 0.2s, height 0.2s;\n        transition: width 0.2s, height 0.2s;\n    }\n\n    .position-highlight {\n        display: block;\n        position: absolute;\n        z-index: 1;\n    }\n    "],
-                providers: [gridster_service_1.GridsterService],
+                providers: [{
+                        provide: gridster_service_1.GridsterService,
+                        useFactory: gridster_service_1.GridsterServiceFactory,
+                        deps: []
+                    }],
                 changeDetection: core_1.ChangeDetectionStrategy.OnPush
             },] },
 ];

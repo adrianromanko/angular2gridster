@@ -13,7 +13,7 @@ import 'rxjs/add/operator/filter';
 
 
 import { utils } from './utils/utils';
-import { GridsterService } from './gridster.service';
+import { GridsterService, GridsterServiceFactory } from './gridster.service';
 import { IGridsterOptions } from './IGridsterOptions';
 import { IGridsterDraggableOptions } from './IGridsterDraggableOptions';
 import { GridsterPrototypeService } from './gridster-prototype/gridster-prototype.service';
@@ -60,7 +60,11 @@ import { GridsterOptions } from './GridsterOptions';
         z-index: 1;
     }
     `],
-    providers: [GridsterService],
+    providers: [{
+        provide: GridsterService,
+        useFactory: GridsterServiceFactory,
+        deps: []
+    }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GridsterComponent implements OnInit, AfterContentInit, OnDestroy {
@@ -75,18 +79,13 @@ export class GridsterComponent implements OnInit, AfterContentInit, OnDestroy {
     @HostBinding('class.gridster--resizing') isResizing = false;
     @HostBinding('class.gridster--ready') isReady = false;
 
-    gridster: GridsterService;
     $element: HTMLElement;
 
 
     gridsterOptions: GridsterOptions;
     private subscription = new Subscription();
 
-    constructor(private zone: NgZone,
-                elementRef: ElementRef, gridster: GridsterService,
-                private gridsterPrototype: GridsterPrototypeService) {
-
-        this.gridster = gridster;
+    constructor(private zone: NgZone, public elementRef: ElementRef, public gridster: GridsterService, private gridsterPrototype: GridsterPrototypeService) {
         this.$element = elementRef.nativeElement;
     }
 

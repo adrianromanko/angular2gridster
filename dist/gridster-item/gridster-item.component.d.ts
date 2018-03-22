@@ -3,6 +3,8 @@ import { GridsterService } from '../gridster.service';
 import { GridListItem } from '../gridList/GridListItem';
 export declare class GridsterItemComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     private zone;
+    elementRef: ElementRef;
+    gridster: GridsterService;
     x: number;
     xChange: EventEmitter<number>;
     y: number;
@@ -41,8 +43,6 @@ export declare class GridsterItemComponent implements OnInit, OnChanges, AfterVi
     isDragging: boolean;
     isResizing: boolean;
     $element: HTMLElement;
-    elementRef: ElementRef;
-    gridster: GridsterService;
     item: GridListItem;
     positionX: number;
     positionY: number;

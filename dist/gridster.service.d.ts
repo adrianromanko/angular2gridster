@@ -5,7 +5,9 @@ import { IGridsterDraggableOptions } from './IGridsterDraggableOptions';
 import { GridListItem } from './gridList/GridListItem';
 import { GridsterComponent } from './gridster.component';
 import { GridsterOptions } from './GridsterOptions';
+export declare const GridsterServiceFactory: () => GridsterService;
 export declare class GridsterService {
+    private static instance;
     $element: HTMLElement;
     gridList: GridList;
     items: Array<GridListItem>;
@@ -14,7 +16,7 @@ export declare class GridsterService {
         [breakpoint: string]: Array<GridListItem>;
     };
     disabledItems: Array<GridListItem>;
-    options: IGridsterOptions;
+    private _options;
     draggableOptions: IGridsterDraggableOptions;
     gridsterRect: ClientRect;
     gridsterScrollData: {
@@ -34,7 +36,9 @@ export declare class GridsterService {
     private currentElement;
     private _maxGridCols;
     private isInit;
+    options: IGridsterOptions;
     constructor();
+    static getInstance(): GridsterService;
     isInitialized(): boolean;
     registerItem(item: GridListItem): GridListItem;
     init(options: IGridsterOptions, draggableOptions: IGridsterDraggableOptions, gridsterComponent: GridsterComponent): void;

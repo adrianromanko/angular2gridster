@@ -10,4 +10,6 @@ var gridster_item_prototype_directive_1 = require("./gridster-prototype/gridster
 exports.GridsterItemPrototypeDirective = gridster_item_prototype_directive_1.GridsterItemPrototypeDirective;
 var GridsterOptions_1 = require("./GridsterOptions");
 exports.GridsterOptions = GridsterOptions_1.GridsterOptions;
+var GridListItem_1 = require("./gridlist/GridListItem");
+exports.GridListItem = GridListItem_1.GridListItem;
 //# sourceMappingURL=index.js.map
