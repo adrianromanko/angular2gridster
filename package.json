@@ -9,7 +9,7 @@
     "start": "npm start --prefix ./demo",
     "lint": "tslint src/**/*.ts && npm run lint --prefix ./demo",
     "test": "karma start",
-    "build": "echo 'Building...' && ./node_modules/.bin/ngc -p tsconfig.json",
+    "build": "./node_modules/.bin/ngc -p tsconfig.json",
     "release-major": "standard-version -- -r major",
     "release-minor": "standard-version -- -r minor",
     "release-fix": "standard-version -- -r patch",

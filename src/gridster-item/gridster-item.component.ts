@@ -159,6 +159,11 @@ export class GridsterItemComponent implements OnInit, OnChanges, AfterViewInit, 
     @Input() yXl: number;
     @Output() yXlChange = new EventEmitter<number>(true);
 
+    @Input() xHD: number;
+    @Output() xHDChange = new EventEmitter<number>();
+    @Input() yHD: number;
+    @Output() yHDChange = new EventEmitter<number>();
+
 
     @Input() w: number;
     @Output() wChange = new EventEmitter<number>(true);

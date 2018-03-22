@@ -60,8 +60,12 @@ export class GridsterService {
      * @param item
      */
     registerItem(item: GridListItem) {
-
-        this.items.push(item);
+        // new griditem should come to top
+        if (this.options.prefer_new) {
+            this.items.unshift(item);
+        } else {
+            this.items.push(item);
+        }
         return item;
     }
 
@@ -157,7 +161,7 @@ export class GridsterService {
             this.previousDragPosition = newPosition;
             this.previousDragSize = newSize;
 
-            this.gridList.moveAndResize(item, newPosition, {w: newSize[0], h: newSize[1]});
+            this.gridList.moveAndResize(item, newPosition, { w: newSize[0], h: newSize[1] });
 
             // Visually update item positions and highlight shape
             this.applyPositionToItems(true);
@@ -208,7 +212,7 @@ export class GridsterService {
 
             this.previousDragPosition = newPosition;
             if (this.options.direction === 'none' || (!this.options.floating && !item.itemPrototype)) {
-                if (!this.gridList.checkItemAboveEmptyArea(item, {x: newPosition[0], y: newPosition[1]})) {
+                if (!this.gridList.checkItemAboveEmptyArea(item, { x: newPosition[0], y: newPosition[1] })) {
                     return;
                 }
             }

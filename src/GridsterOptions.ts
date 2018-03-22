@@ -25,7 +25,8 @@ export class GridsterOptions {
         resizable: false,
         useCSSTransforms: false,
         floating: true,
-        tolerance: 'pointer'
+        tolerance: 'pointer',
+        prefer_new: true
     };
 
     change: Observable<IGridsterOptions>;
@@ -34,10 +35,11 @@ export class GridsterOptions {
     basicOptions: IGridsterOptions;
 
     breakpointsMap = {
-        sm: 576, // Small devices
-        md: 768, // Medium devices
-        lg: 992, // Large devices
-        xl: 1200 // Extra large
+        sm: 576,  // Small devices
+        md: 768,  // Medium devices
+        lg: 992,  // Large devices
+        xl: 1200, // Extra large,
+        hd: 1920  // HD
     };
 
     constructor(config: IGridsterOptions) {
